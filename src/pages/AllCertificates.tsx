@@ -16,7 +16,7 @@ const allCertificates: Certificate[] = [
   {
     id: 1,
     title: "Google: Accelerate Your Job Search with AI",
-    image: "/images/google-2.png",
+    image: "/images/Google-2.png",
     pdfLink: "https://www.coursera.org/account/accomplishments/verify/TSIMX0H5DOK7",
     issuer: "Coursera",
     date: "Sep 2025",
@@ -24,7 +24,7 @@ const allCertificates: Certificate[] = [
   {
     id: 2,
     title: "Google: Design a User Experience for Social Good & Prepare for Jobs",
-    image: "/images/Google-1.png",
+    image: "/images/google-1.png",
     pdfLink: "https://www.coursera.org/account/accomplishments/verify/JYP6MXGEJJIU",
     issuer: "Coursera",
     date: "Sep 2025",
