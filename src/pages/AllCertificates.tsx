@@ -16,7 +16,7 @@ const allCertificates: Certificate[] = [
   {
     id: 1,
     title: "Google: Accelerate Your Job Search with AI",
-    image: "src/assets/images/google-2.png",
+    image: "/images/google-2.png",
     pdfLink: "https://www.coursera.org/account/accomplishments/verify/TSIMX0H5DOK7",
     issuer: "Coursera",
     date: "Sep 2025",
@@ -24,7 +24,7 @@ const allCertificates: Certificate[] = [
   {
     id: 2,
     title: "Google: Design a User Experience for Social Good & Prepare for Jobs",
-    image: "src/assets/images/Google-1.png",
+    image: "/images/Google-1.png",
     pdfLink: "https://www.coursera.org/account/accomplishments/verify/JYP6MXGEJJIU",
     issuer: "Coursera",
     date: "Sep 2025",
@@ -32,7 +32,7 @@ const allCertificates: Certificate[] = [
   {
     id: 3,
     title: "Scyscanner: Front-End Software Engineering Job Simulation",
-    image: "src/assets/images/skyscanner-certificate.jpg",
+    image: "/images/skyscanner-certificate.jpg",
     pdfLink: "#",
     issuer: "Forage",
     date: "Aug 2025",
@@ -40,7 +40,7 @@ const allCertificates: Certificate[] = [
   {
     id: 4,
     title: "HPE: Software Engineering Job Simulation",
-    image: "src/assets/images/hpe-certificate.jpg",
+    image: "/images/hpe-certificate.jpg",
     pdfLink: "#",
     issuer: "Forage",
     date: "Aug 2025",
@@ -48,7 +48,7 @@ const allCertificates: Certificate[] = [
   {
     id: 5,
     title: "Electronic Arts: Software Engineering Job Simulation",
-    image: "src/assets/images/EA-Certificate.jpg",
+    image: "/images/EA-Certificate.jpg",
     pdfLink: "#",
     issuer: "Forage",
     date: "Feb 2025",
@@ -56,7 +56,7 @@ const allCertificates: Certificate[] = [
   {
     id: 6,
     title: "Tailwind CSS v4 - Beginner to Pro",
-    image: "src/assets/images/8.jpg",
+    image: "/images/8.jpg",
     pdfLink: "https://www.udemy.com/certificate/UC-1fe2b67e-34e2-44b5-b9dc-526cc0245d8d/",
     issuer: "Udemy",
     date: "Feb 2025",
@@ -64,7 +64,7 @@ const allCertificates: Certificate[] = [
   {
     id: 7,
     title: "Crash Course: Build a Full-Stack Web App in a Weekend!",
-    image: "src/assets/images/7.jpg",
+    image: "/images/7.jpg",
     pdfLink: "https://www.udemy.com/certificate/UC-972b6692-472a-4653-a2bd-6480fd0f82e0/",
     issuer: "Udemy",
     date: "Feb 2025",
@@ -72,7 +72,7 @@ const allCertificates: Certificate[] = [
   {
     id: 8,
     title: "The Complete Cyber Security Course : Hackers Exposed!",
-    image: "src/assets/images/6.jpg",
+    image: "/images/6.jpg",
     pdfLink: "https://www.udemy.com/certificate/UC-7fd1385b-1a92-40fe-83a7-e9aa8732e9d8/",
     issuer: "Udemy",
     date: "Sep 2023",
@@ -80,7 +80,7 @@ const allCertificates: Certificate[] = [
   {
     id: 9,
     title: "Intel® AI Fundamentals",
-    image: "src/assets/images/IC.jpg",
+    image: "/images/IC.jpg",
     pdfLink: "https://www.coursera.org/account/accomplishments/specialization/HB6N75LG2K6B",
     issuer: "Coursera",
     date: "Sep 2023",
@@ -88,7 +88,7 @@ const allCertificates: Certificate[] = [
   {
     id: 10,
     title: "Intel® AI Win Recipes",
-    image: "src/assets/images/IC3.jpg",
+    image: "/images/IC3.jpg",
     pdfLink: "https://www.coursera.org/account/accomplishments/verify/E9LRWZDNXHDN?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course",
     issuer: "Coursera",
     date: "Sep 2023",
@@ -96,7 +96,7 @@ const allCertificates: Certificate[] = [
   {
     id: 11,
     title: "The Intel® AI Value",
-    image: "src/assets/images/IC2.jpg",
+    image: "/images/IC2.jpg",
     pdfLink: "https://www.coursera.org/account/accomplishments/verify/956U2YK88Y6C?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course",
     issuer: "Coursera",
     date: "Sep 2023",
@@ -104,7 +104,7 @@ const allCertificates: Certificate[] = [
   {
     id: 12,
     title: "Intel® AI Essentials",
-    image: "src/assets/images/IC1.jpg",
+    image: "/images/IC1.jpg",
     pdfLink: "https://www.coursera.org/account/accomplishments/verify/D6TEQSJX66XV?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course",
     issuer: "Coursera",
     date: "Sep 2023",
@@ -112,7 +112,7 @@ const allCertificates: Certificate[] = [
   {
     id: 13,
     title: "WHMIS for Students",
-    image: "src/assets/images/1.jpg",
+    image: "/images/1.jpg",
     pdfLink: "#",
     issuer: "Toronto Metropolitan University",
     date: "Oct 2024",
@@ -120,7 +120,7 @@ const allCertificates: Certificate[] = [
   {
     id: 14,
     title: "Android Development for Beginners: Your first app in 2 hours",
-    image: "src/assets/images/2.jpg",
+    image: "/images/2.jpg",
     pdfLink: "https://www.udemy.com/certificate/UC-66695bc7-af94-4f89-993e-85229ef23596/",
     issuer: "Udemy",
     date: "Nov 2021",
@@ -128,7 +128,7 @@ const allCertificates: Certificate[] = [
   {
     id: 15,
     title: "Introduction to Electric Circuits",
-    image: "src/assets/images/3.jpg",
+    image: "/images/3.jpg",
     pdfLink: "https://www.udemy.com/certificate/UC-b164abf7-974c-4e75-8574-404d68524c56/",
     issuer: "Udemy",
     date: "Jan 2021",
@@ -136,7 +136,7 @@ const allCertificates: Certificate[] = [
   {
     id: 16,
     title: "Learn C++ by Creating",
-    image: "src/assets/images/4.jpg",
+    image: "/images/4.jpg",
     pdfLink: "https://www.udemy.com/certificate/UC-178450c5-fae5-4294-93f7-e159e0f39955/",
     issuer: "Udemy",
     date: "Dec 2020",
@@ -144,7 +144,7 @@ const allCertificates: Certificate[] = [
   {
     id: 17,
     title: "Python For Everybody : Python Programming MADE EASY",
-    image: "src/assets/images/5.jpg",
+    image: "/images/5.jpg",
     pdfLink: "https://www.udemy.com/certificate/UC-37b59d56-9f18-48a7-9ad0-de371f13df63/",
     issuer: "Udemy",
     date: "Nov 2020",
