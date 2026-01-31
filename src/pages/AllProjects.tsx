@@ -49,7 +49,7 @@ const allProjects: Project[] = [
     id: 4,
     title: "Happy Chappy Grill Website",
     description: "Website proposal to a local family-owned restaurant.",
-    image: "/images/Happy-chappy.png",
+    image: "/images/happy-chappy.png",
     link: "https://happy-chappy-demo.netlify.app/",
     github: "#",
     tags: ["HTML", "CSS", "JavaScript"],
