@@ -3,7 +3,6 @@ import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 
-// --- NOTE: Images must be in the 'public/images' folder for these string paths to work ---
 interface Project {
   id: number;
   title: string;
