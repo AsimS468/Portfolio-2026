@@ -20,7 +20,7 @@ interface SmallItem {
 const experiences: LargeItem[] = [
   { img: "/icons/UiUx-icon.png", title: "Freelance Front-End Engineer", Subtitle1: "Web Developer", Subtitle2: "Aug 2025 - Present" },
   { img: "/icons/skyscanner-icon.png", title: "Skyscanner", Subtitle1: "Virtual Frontend Software Engineer", Subtitle2: "Aug 2025" },
-  { img: "/icons/hpe-icon.png", title: "Hewlett Packard Enterprise", Subtitle1: "Virtual Software Engineer", Subtitle2: "Jul 2025" },
+  // { img: "/icons/hpe-icon.png", title: "Hewlett Packard Enterprise", Subtitle1: "Virtual Software Engineer", Subtitle2: "Jul 2025" },
   { img: "/icons/ea-icon.png", title: "EA Sports", Subtitle1: "Virtual Software Engineer", Subtitle2: "February 2025" },
   { img: "/icons/TheStoryGarden-icon.png", title: "The Story Garden", Subtitle1: "Volunteer Supervisor", Subtitle2: "Jul 2019 - Aug 2019" },
   { img: "/icons/polycultural-icon.png", title: "Polycultural", Subtitle1: "Volunteer Supervisor", Subtitle2: "Jul 2019 - Aug 2019" },
