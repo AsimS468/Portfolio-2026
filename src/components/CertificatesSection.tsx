@@ -27,11 +27,18 @@ const certificates: Certificate[] = [
   },
   {
     id: 3,
-    title: "Software Engineering",
-    image: "/images/hpe-certificate.jpg",
-    pdfLink: "/documents/hpe-certificate.pdf",
-    issuer: "Forage",
+    title: "Tailwind CSS v4 - Beginner to Pro",
+    image: "/images/8.jpg",
+    pdfLink: "https://www.udemy.com/certificate/UC-1fe2b67e-34e2-44b5-b9dc-526cc0245d8d/",
+    issuer: "Udemy",
   },
+  // {
+  //   id: 3,
+  //   title: "Software Engineering",
+  //   image: "/images/hpe-certificate.jpg",
+  //   pdfLink: "/documents/hpe-certificate.pdf",
+  //   issuer: "Forage",
+  // },
   {
     id: 4,
     title: "Software Engineering",
