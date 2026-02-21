@@ -37,14 +37,14 @@ const allCertificates: Certificate[] = [
     issuer: "Forage",
     date: "Aug 2025",
   },
-  {
-    id: 4,
-    title: "HPE: Software Engineering Job Simulation",
-    image: "/images/hpe-certificate.jpg",
-    pdfLink: "#",
-    issuer: "Forage",
-    date: "Aug 2025",
-  },
+  // {
+  //   id: 4,
+  //   title: "HPE: Software Engineering Job Simulation",
+  //   image: "/images/hpe-certificate.jpg",
+  //   pdfLink: "#",
+  //   issuer: "Forage",
+  //   date: "Aug 2025",
+  // },
   {
     id: 5,
     title: "Electronic Arts: Software Engineering Job Simulation",
