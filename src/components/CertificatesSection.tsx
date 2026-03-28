@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Award } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowRight, FileText, Award, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface Certificate {
@@ -32,13 +33,6 @@ const certificates: Certificate[] = [
     pdfLink: "https://www.udemy.com/certificate/UC-1fe2b67e-34e2-44b5-b9dc-526cc0245d8d/",
     issuer: "Udemy",
   },
-  // {
-  //   id: 3,
-  //   title: "Software Engineering",
-  //   image: "/images/hpe-certificate.jpg",
-  //   pdfLink: "/documents/hpe-certificate.pdf",
-  //   issuer: "Forage",
-  // },
   {
     id: 4,
     title: "Software Engineering",
@@ -63,14 +57,29 @@ const certificates: Certificate[] = [
 ];
 
 export const CertificatesSection = () => {
+  // --- Carousel State ---
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % certificates.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + certificates.length) % certificates.length);
+  };
+
+  // Optional: Auto-play the carousel every 4 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // --- Animation Variants for Mobile Grid ---
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
 
   const itemVariants = {
@@ -78,9 +87,18 @@ export const CertificatesSection = () => {
     visible: { opacity: 1, y: 0, scale: 1 },
   };
 
+  // --- Animation Variants for Desktop Carousel ---
+  const carouselVariants = {
+    center: { x: "0%", scale: 1, zIndex: 30, opacity: 1 },
+    left: { x: "-75%", scale: 0.85, zIndex: 20, opacity: 0.6 },
+    right: { x: "75%", scale: 0.85, zIndex: 20, opacity: 0.6 },
+    hidden: { x: "0%", scale: 0.5, zIndex: 10, opacity: 0 }, // Cards behind are invisible
+  };
+
   return (
-    <section id="certificates" className="py-20 md:py-32">
+    <section id="certificates" className="py-20 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4">
+        {/* Header section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -94,61 +112,71 @@ export const CertificatesSection = () => {
           </p>
         </motion.div>
 
-        {/* Certificates Grid - Hexagonal/Staggered Layout */}
+        {/* --- MOBILE VIEW: Single Column Grid --- */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6 max-w-5xl mx-auto"
         >
-          {certificates.map((cert, index) => (
-            <motion.div
-              key={cert.id}
-              variants={itemVariants}
-              whileHover={{ scale: 1.03, y: -8, rotateY: 5 }}
-              transition={{ duration: 0.3 }}
-              className={`${index % 3 === 1 ? "lg:mt-12" : ""}`}
-              style={{ perspective: "1000px" }}
-            >
-              <div className="liquid-glass-hover rounded-3xl overflow-hidden group">
-                {/* Certificate Image */}
-                <div className="relative overflow-hidden aspect-[4/3]">
-                  <img
-                    src={cert.image}
-                    alt={cert.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60" />
-                  
-                  {/* Badge */}
-                  <div className="absolute top-4 right-4">
-                    <div className="liquid-glass p-2 rounded-xl">
-                      <Award className="w-5 h-5 text-primary" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-5">
-                  <p className="text-xs text-primary font-medium mb-1">{cert.issuer}</p>
-                  <h3 className="text-lg font-bold mb-4">{cert.title}</h3>
-                  
-                  <motion.a
-                    href={cert.pdfLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ x: 5 }}
-                    className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-glow transition-colors"
-                  >
-                    <FileText className="w-4 h-4" />
-                    <span>View Certificate</span>
-                  </motion.a>
-                </div>
-              </div>
+          {certificates.map((cert) => (
+            <motion.div key={cert.id} variants={itemVariants}>
+              <CertificateCard cert={cert} isCenter={true} />
             </motion.div>
           ))}
         </motion.div>
+
+        {/* --- DESKTOP VIEW: 3-Card Carousel --- */}
+        <div className="hidden lg:flex relative w-full h-[450px] items-center justify-center max-w-6xl mx-auto">
+          
+          {/* Navigation Arrows */}
+          <button 
+            onClick={prevSlide}
+            className="absolute left-8 z-50 liquid-glass p-3 rounded-full hover:text-primary transition-colors hover:scale-110 active:scale-95"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          
+          <button 
+            onClick={nextSlide}
+            className="absolute right-8 z-50 liquid-glass p-3 rounded-full hover:text-primary transition-colors hover:scale-110 active:scale-95"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Carousel Track */}
+          {certificates.map((cert, index) => {
+            // Determine position relative to the currentIndex
+            let position = "hidden";
+            if (index === currentIndex) {
+              position = "center";
+            } else if (index === (currentIndex + 1) % certificates.length) {
+              position = "right";
+            } else if (index === (currentIndex - 1 + certificates.length) % certificates.length) {
+              position = "left";
+            }
+
+            return (
+              <motion.div
+                key={cert.id}
+                className="absolute w-[400px]"
+                variants={carouselVariants}
+                initial={false}
+                animate={position}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                // Make non-center cards clickable to slide to them
+                onClick={() => {
+                  if (position === "left") prevSlide();
+                  if (position === "right") nextSlide();
+                }}
+                style={{ cursor: position === "center" ? "default" : "pointer" }}
+              >
+                <CertificateCard cert={cert} isCenter={position === "center"} />
+              </motion.div>
+            );
+          })}
+        </div>
 
         {/* See All Button */}
         <motion.div
@@ -172,3 +200,51 @@ export const CertificatesSection = () => {
     </section>
   );
 };
+
+// Sub-component for the card UI
+const CertificateCard = ({ cert, isCenter }: { cert: Certificate; isCenter: boolean }) => (
+  <motion.div 
+    className="liquid-glass rounded-3xl overflow-hidden group h-full shadow-lg"
+    // Only allow the hover lift effect if it's the center card or on mobile
+    whileHover={isCenter ? { y: -8 } : {}}
+  >
+    {/* Certificate Image */}
+    <div className="relative overflow-hidden aspect-[4/3]">
+      <img
+        src={cert.image}
+        alt={cert.title}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60" />
+
+      {/* Badge */}
+      <div className="absolute top-4 right-4">
+        <div className="liquid-glass p-2 rounded-xl">
+          <Award className="w-5 h-5 text-primary" />
+        </div>
+      </div>
+    </div>
+
+    {/* Content */}
+    <div className="p-5 flex flex-col justify-between">
+      <div>
+        <p className="text-xs text-primary font-medium mb-1">{cert.issuer}</p>
+        <h3 className="text-lg font-bold mb-4">{cert.title}</h3>
+      </div>
+
+      <a
+        href={cert.pdfLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        // Prevent accidental link clicks on side cards
+        onClick={(e) => !isCenter && e.preventDefault()}
+        className={`inline-flex items-center gap-2 text-sm font-medium transition-colors mt-auto ${
+          isCenter ? "text-primary hover:text-primary-glow" : "text-primary/50 pointer-events-none"
+        }`}
+      >
+        <FileText className="w-4 h-4" />
+        <span>View Certificate</span>
+      </a>
+    </div>
+  </motion.div>
+);
