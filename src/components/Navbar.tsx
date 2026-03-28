@@ -16,7 +16,7 @@ const navItems: NavItem[] = [
   { id: "home", icon: <Home className="w-5 h-5" />, label: "Home", href: "#hero" },
   { id: "about", icon: <User className="w-5 h-5" />, label: "About", href: "#about" },
   { id: "projects", icon: <Briefcase className="w-5 h-5" />, label: "Projects", href: "#projects" },
-  { id: "services", icon: <Wrench className="w-5 h-5" />, label: "Services", href: "#projects" },
+  { id: "services", icon: <Wrench className="w-5 h-5" />, label: "Services", href: "#services" },
   { id: "certificates", icon: <Award className="w-5 h-5" />, label: "Certificates", href: "#certificates" },
   { id: "contact", icon: <Mail className="w-5 h-5" />, label: "Contact", href: "#contact" },
 ];
