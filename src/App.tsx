@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import WhatsNew from "./pages/WhatsNew";
 import AllProjects from "./pages/AllProjects";
 import AllCertificates from "./pages/AllCertificates";
+// import Tutoring from "./pages/Tutoring/TutoringMain";
+// import WebDev from "./pages/WebDev/WebDevMain";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +26,8 @@ const App = () => (
             <Route path="/whats-new" element={<WhatsNew />} />
             <Route path="/projects" element={<AllProjects />} />
             <Route path="/certificates" element={<AllCertificates />} />
+            {/* <Route path="/tutoring" element={<Tutoring />} />
+            <Route path="/webdev" element={<WebDev />} /> */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

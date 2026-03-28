@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Briefcase, GraduationCap, Code } from "lucide-react";
-import headshot from "@/assets/images/me.jpg";
+import headshot from "/images/me.jpg";
 
 interface LargeItem {
   img: string;
@@ -15,7 +15,6 @@ interface SmallItem {
   name: string;
   skill: string;
 }
-
 
 const experiences: LargeItem[] = [
   { img: "/icons/UiUx-icon.png", title: "Freelance Front-End Engineer", Subtitle1: "Web Developer", Subtitle2: "Aug 2025 - Present" },
@@ -52,25 +51,32 @@ const techStack: SmallItem[] = [
 type TabType = "experience" | "education" | "tech";
 
 const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
-  { id: "experience", label: "Experience", icon: <Briefcase className="w-4 h-4" /> },
-  { id: "education", label: "Education", icon: <GraduationCap className="w-4 h-4" /> },
-  { id: "tech", label: "Tech Stack", icon: <Code className="w-4 h-4" /> },
+  { id: "experience", label: "Experience", icon: <Briefcase className="w-5 h-5" /> },
+  { id: "education", label: "Education", icon: <GraduationCap className="w-5 h-5" /> },
+  { id: "tech", label: "Tech Stack", icon: <Code className="w-5 h-5" /> },
 ];
+
+const getSkillValue = (skill: string) => {
+  switch (skill) {
+    case "Learning...": return 0;
+    case "Novice": return 0.3;
+    case "Intermediate": return 0.6;
+    case "Advanced": return 0.9;
+    default: return 0;
+  }
+};
 
 export const AboutSection = () => {
   const [activeTab, setActiveTab] = useState<TabType>("experience");
 
+  // Handles the entrance animation (Stagger)
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
 
-  const itemVariants = {
+  // Handles the entrance animation (Individual Card Appearance)
+  const itemEntranceVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
@@ -78,6 +84,7 @@ export const AboutSection = () => {
   return (
     <section id="about" className="py-20 md:py-32">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -91,265 +98,228 @@ export const AboutSection = () => {
           </p>
         </motion.div>
 
-        {/* Bio Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col lg:flex-row justify-center gap-12 mb-20"
-        >
-          {/* Headshot - Desktop only */}
-          <div className="hidden lg:block flex-shrink-0">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="liquid-glass p-3 rounded-3xl"
-            >
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-12 w-full items-start">
+          
+          {/* LEFT COLUMN: Bio Box */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="min-w-0"
+          >
+            <div className="liquid-glass rounded-3xl p-8 md:p-10 w-full max-w-2xl mx-auto lg:ml-auto lg:mr-0 text-left">
               <img
                 src={headshot}
                 alt="Profile headshot"
-                className="w-65 h-64 rounded-2xl object-cover"
+                className="w-32 h-32 md:w-48 md:h-48 rounded-2xl object-cover mb-4 mr-6 float-left shadow-lg"
               />
-            </motion.div>
-          </div>
+              <p className="text-lg leading-relaxed text-foreground/90">
+                Hello 👋 My name is Muhammad Asim Salman (but you can call me Asim). I'm a third-year undergraduate student at Toronto Metropolitan University with a major in Computer Engineering and a minor in Computer Science.
+              </p>
+              <p className="text-lg leading-relaxed text-foreground/90 mt-4">
+                I'm a detail-oriented and adaptable individual with strong technical, organizational, and communication skills. Experienced in working both independently and in teams to complete projects efficiently and accurately. Skilled in data management, software tools, and troubleshooting.
+              </p>
+              <div className="clear-both"></div>
+            </div>
+          </motion.div>
 
-          {/* Bio text */}
-          <div className="liquid-glass rounded-3xl p-8 md:p-10 flex-1 max-w-3xl">
-            <p className="text-lg leading-relaxed text-foreground/90">
-              Hello 👋 My name is Muhammad Asim Salman (but you can call me Asim). I'm a third-year undergraduate student at Toronto Metropolitan University with a major in Computer Engineering and a minor in Computer Science.
-            </p>
-            <p className="text-lg leading-relaxed text-foreground/90 mt-4">
-              I'm a detail-oriented and adaptable individual with strong technical, organizational, and communication skills. Experienced in working both independently and in teams to complete projects efficiently and accurately. Skilled in data management, software tools, and troubleshooting.
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Tabs Section */}
-        <div>
-          {/* Tab buttons */}
-          <div className="flex justify-center mb-8">
-            <div className="liquid-glass rounded-full p-1.5 flex gap-1">
+          {/* MIDDLE COLUMN: Centered Tab Icons */}
+          <div className="flex justify-center w-full lg:w-auto">
+            <div className="liquid-glass rounded-full p-2 flex flex-row lg:flex-col gap-2 sticky top-32">
               {tabs.map((tab) => (
                 <motion.button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`relative px-6 py-3 rounded-full flex items-center gap-2 font-medium transition-colors ${
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`relative p-4 rounded-full flex items-center justify-center transition-colors ${
                     activeTab === tab.id
                       ? "text-primary-foreground"
                       : "text-foreground/70 hover:text-foreground"
                   }`}
+                  aria-label={tab.label}
+                  title={tab.label}
                 >
                   {activeTab === tab.id && (
                     <motion.div
-                      layoutId="active-tab"
+                      layoutId="about-active-tab"
                       className="absolute inset-0 bg-primary rounded-full"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                     />
                   )}
                   <span className="relative z-10">{tab.icon}</span>
-                  <span className="relative z-10 hidden sm:inline">{tab.label}</span>
                 </motion.button>
               ))}
             </div>
           </div>
 
-          {/* Tab content */}
-          <motion.div
-            key={activeTab}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-wrap justify-center gap-4"
-          >
-            {activeTab === "experience" &&
-              experiences.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                    hover: { scale: 1.05, y: -4 } // Card lift
-                  }}
-                  className="card-tech flex items-center gap-3 cursor-pointer overflow-hidden w-[350px] h-[75px] px-4"
-                >
-                  {/* Image Container */}
-                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                    <motion.img
-                      src={exp.img}
-                      alt={exp.title}
-                      className="w-full h-full object-contain"
-                      variants={{
-                        visible: { scale: 1 },
-                        hover: { scale: 1.25 }
-                      }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                    />
-                  </div>
-
-                  {/* Text Container: Static (No movement here) */}
-                  <div className="min-w-0 flex-1 flex flex-col justify-center">
-                    
-                    {/* Title: This is the ONLY thing that moves vertically */}
-                    <motion.h4 
-                      className="font-semibold text-sm leading-none truncate relative z-10"
-                      variants={{
-                        // 1. In 'visible' state (idle), we push it DOWN to visually center it
-                        //    because the invisible subtitles are taking up space below it.
-                        visible: { y: 18 }, 
-                        // 2. On hover, it returns to its natural position (moving UP)
-                        hover: { y: 0 }
-                      }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                    >
-                      {exp.title}
-                    </motion.h4>
-                    
-                    {/* Subtitles: STRICTLY opacity only. No Y movement. */}
+          {/* RIGHT COLUMN: Tab Content */}
+          <div className="min-w-0">
+            <motion.div
+              key={activeTab}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-wrap justify-center lg:justify-start gap-4"
+            >
+              {activeTab === "experience" &&
+                experiences.map((exp, index) => (
+                  // OUTER WRAPPER: Handles entrance stagger only
+                  <motion.div key={`exp-${index}`} variants={itemEntranceVariants}>
+                    {/* INNER CARD: Handles hover interactions only */}
                     <motion.div
+                      initial="idle"
+                      animate="idle"
+                      whileHover="hover"
                       variants={{
-                        visible: { opacity: 0 },
-                        hover: { opacity: 1 }
+                        idle: { scale: 1, y: 0 },
+                        hover: { scale: 1.05, y: -4 }
                       }}
-                      transition={{ duration: 0.2 }} // Fast, clean fade
+                      className="card-tech flex items-center gap-3 cursor-pointer overflow-hidden w-[350px] h-[75px] px-4"
                     >
-                      <p className="text-xs text-muted-foreground mt-1 truncate">
-                        {exp.Subtitle1}
-                      </p>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {exp.Subtitle2}
-                      </p>
+                      <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                        <motion.img
+                          src={exp.img}
+                          alt={exp.title}
+                          className="w-full h-full object-contain"
+                          variants={{ idle: { scale: 1 }, hover: { scale: 1.25 } }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1 flex flex-col justify-center">
+                        <motion.h4 
+                          className="font-semibold text-sm leading-none truncate relative z-10"
+                          variants={{ idle: { y: 18 }, hover: { y: 0 } }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                        >
+                          {exp.title}
+                        </motion.h4>
+                        <motion.div
+                          variants={{ idle: { opacity: 0 }, hover: { opacity: 1 } }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <p className="text-xs text-muted-foreground mt-1 truncate">{exp.Subtitle1}</p>
+                          <p className="text-xs text-muted-foreground truncate">{exp.Subtitle2}</p>
+                        </motion.div>
+                      </div>
                     </motion.div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
 
-            {activeTab === "education" &&
-              education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                    hover: { scale: 1.05, y: -4 }
-                  }}
-                  className="card-tech flex items-center gap-3 cursor-pointer overflow-hidden w-[350px] h-[75px] px-4"
-                >
-                  {/* Image Container */}
-                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                    <motion.img
-                      src={edu.img}
-                      alt={edu.title}
-                      className="w-full h-full object-contain"
-                      variants={{
-                        visible: { scale: 1 },
-                        hover: { scale: 1.25 }
-                      }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                    />
-                  </div>
-
-                  {/* Text Container: Static */}
-                  <div className="min-w-0 flex-1 flex flex-col justify-center">
-                    
-                    {/* Title: Moves vertically */}
-                    <motion.h4 
-                      className="font-semibold text-sm leading-none truncate relative z-10"
-                      variants={{
-                        visible: { y: 18 }, // Pushed down to center
-                        hover: { y: 0 }     // Slides up
-                      }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                    >
-                      {edu.title}
-                    </motion.h4>
-                    
-                    {/* Subtitles: Opacity Only */}
+              {activeTab === "education" &&
+                education.map((edu, index) => (
+                  <motion.div key={`edu-${index}`} variants={itemEntranceVariants}>
                     <motion.div
+                      initial="idle"
+                      animate="idle"
+                      whileHover="hover"
                       variants={{
-                        visible: { opacity: 0 },
-                        hover: { opacity: 1 }
+                        idle: { scale: 1, y: 0 },
+                        hover: { scale: 1.05, y: -4 }
                       }}
-                      transition={{ duration: 0.2 }}
+                      className="card-tech flex items-center gap-3 cursor-pointer overflow-hidden w-[350px] h-[75px] px-4"
                     >
-                      <p className="text-xs text-muted-foreground mt-1 truncate">
-                        {edu.Subtitle1}
-                      </p>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {edu.Subtitle2}
-                      </p>
+                      <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                        <motion.img
+                          src={edu.img}
+                          alt={edu.title}
+                          className="w-full h-full object-contain"
+                          variants={{ idle: { scale: 1 }, hover: { scale: 1.25 } }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1 flex flex-col justify-center">
+                        <motion.h4 
+                          className="font-semibold text-sm leading-none truncate relative z-10"
+                          variants={{ idle: { y: 18 }, hover: { y: 0 } }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                        >
+                          {edu.title}
+                        </motion.h4>
+                        <motion.div
+                          variants={{ idle: { opacity: 0 }, hover: { opacity: 1 } }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <p className="text-xs text-muted-foreground mt-1 truncate">{edu.Subtitle1}</p>
+                          <p className="text-xs text-muted-foreground truncate">{edu.Subtitle2}</p>
+                        </motion.div>
+                      </div>
                     </motion.div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
 
-            {activeTab === "tech" &&
-              techStack.map((tech, index) => (
-                <motion.div
-                  key={index}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                    hover: { scale: 1.05, y: -4 }
-                  }}
-                  className="card-tech flex items-center gap-3 cursor-pointer overflow-hidden"
-                >
-                  {/* Image Container */}
-                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                    <motion.img
-                      src={tech.img}
-                      alt={tech.name}
-                      className="w-full h-full object-contain"
+              {activeTab === "tech" &&
+                techStack.map((tech, index) => (
+                  <motion.div key={`tech-${index}`} variants={itemEntranceVariants}>
+                    <motion.div
+                      initial="idle"
+                      animate="idle"
+                      whileHover="hover"
                       variants={{
-                        visible: { scale: 1 },
-                        hover: { scale: 1.25 }
+                        idle: { scale: 1, y: 0 },
+                        hover: { scale: 1.05, y: -4 }
                       }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                    />
-                  </div>
+                      className="card-tech flex items-center gap-3 cursor-pointer overflow-hidden relative pr-4 py-2"
+                    >
+                      <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                        <motion.img
+                          src={tech.img}
+                          alt={tech.name}
+                          className="w-full h-full object-contain"
+                          variants={{ idle: { scale: 1 }, hover: { scale: 1.25 } }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1 flex flex-col justify-center">
+                        <motion.h4 
+                          className="font-semibold text-sm leading-none relative z-10"
+                          variants={{ idle: { y: 11 }, hover: { y: 0 } }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                        >
+                          {tech.name}
+                        </motion.h4>
+                        <motion.p
+                          className="text-xs text-muted-foreground mt-1"
+                          variants={{ idle: { opacity: 0 }, hover: { opacity: 1 } }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {tech.skill}
+                        </motion.p>
+                      </div>
 
-                  {/* Text Container: Static (No movement on the container itself) */}
-                  <div className="min-w-0 flex-1 flex flex-col justify-center">
-                    
-                    {/* Title: This is the ONLY thing that moves vertically */}
-                    <motion.h4 
-                      className="font-semibold text-sm leading-none relative z-10"
-                      variants={{
-                        // 1. Pushed down by 8px to visually center it when idle
-                        visible: { y: 11 }, 
-                        // 2. Slides up to normal position on hover
-                        hover: { y: 0 }    
-                      }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                    >
-                      {tech.name}
-                    </motion.h4>
-                    
-                    {/* Skill: STRICTLY opacity only. No Y movement. */}
-                    <motion.p
-                      className="text-xs text-muted-foreground mt-1"
-                      variants={{
-                        visible: { opacity: 0 },
-                        hover: { opacity: 1 }
-                      }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {tech.skill}
-                    </motion.p>
-                  </div>
-                </motion.div>
-              ))}
-          </motion.div>
+                      {/* Animated Donut Chart */}
+                      <motion.div
+                        variants={{
+                          idle: { opacity: 0, scale: 0.8 },
+                          hover: { opacity: 1, scale: 1 }
+                        }}
+                        transition={{ duration: 0.2 }}
+                        className="ml-auto w-6 h-6 flex-shrink-0 relative"
+                      >
+                        <svg className="w-full h-full -rotate-90" viewBox="0 0 24 24">
+                          <circle cx="12" cy="12" r="10" strokeWidth="4" stroke="currentColor" fill="none" className="text-foreground/10" />
+                          <motion.circle
+                            cx="12" cy="12" r="10"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                            stroke="currentColor"
+                            fill="none"
+                            className="text-primary"
+                            variants={{
+                              idle: { pathLength: 0 },
+                              hover: { pathLength: getSkillValue(tech.skill) }
+                            }}
+                            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+                          />
+                        </svg>
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                ))}
+            </motion.div>
+          </div>
+
         </div>
       </div>
     </section>
