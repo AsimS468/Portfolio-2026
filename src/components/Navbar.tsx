@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Home, User, Briefcase, Award, Mail, Github, Linkedin, Sun, Moon } from "lucide-react";
+import { Home, User, Briefcase, Wrench, Award, Mail, Github, Linkedin, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 // 1. Import Router Hooks
 import { useLocation, useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ const navItems: NavItem[] = [
   { id: "home", icon: <Home className="w-5 h-5" />, label: "Home", href: "#hero" },
   { id: "about", icon: <User className="w-5 h-5" />, label: "About", href: "#about" },
   { id: "projects", icon: <Briefcase className="w-5 h-5" />, label: "Projects", href: "#projects" },
+  { id: "services", icon: <Wrench className="w-5 h-5" />, label: "Services", href: "#projects" },
   { id: "certificates", icon: <Award className="w-5 h-5" />, label: "Certificates", href: "#certificates" },
   { id: "contact", icon: <Mail className="w-5 h-5" />, label: "Contact", href: "#contact" },
 ];
@@ -153,11 +154,9 @@ const MobileNavbar = () => {
   const [activeItem, setActiveItem] = useState("home");
   const { theme, toggleTheme } = useTheme();
 
-  // 5. Initialize Hooks for Mobile too
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 6. Smart Navigation Handler (Mobile Version)
   const handleNavClick = (id: string, href: string) => {
     setActiveItem(id);
     
@@ -173,8 +172,10 @@ const MobileNavbar = () => {
     }
   };
 
+  // UPDATED: Include services by expanding the slice or selecting specific items
+  // Using slice(0, 5) ensures Home, About, Projects, Services, and Certificates are considered
   const mobileNavItems = [
-    ...navItems.slice(0, 4),
+    ...navItems.slice(0, 5), // This now includes 'Services' (index 3) and 'Certificates' (index 4)
     { id: "theme", icon: theme === "light" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />, label: "Theme", href: "#" },
   ];
 
@@ -185,7 +186,10 @@ const MobileNavbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed bottom-4 left-0 right-0 z-50 md:hidden flex justify-center"
     >
-      <div className="liquid-glass rounded-3xl px-4 py-3 flex items-center gap-2">
+      {/* TIP: If the navbar gets too wide with the extra icon, 
+          you can reduce the 'gap-2' to 'gap-1' or 'px-4' to 'px-2' 
+      */}
+      <div className="liquid-glass rounded-3xl px-3 py-2 flex items-center gap-1">
         {mobileNavItems.map((item) => (
           <motion.button
             key={item.id}
@@ -193,7 +197,6 @@ const MobileNavbar = () => {
               if (item.id === "theme") {
                 toggleTheme();
               } else {
-                // 7. Use the new handler
                 handleNavClick(item.id, item.href);
               }
             }}
