@@ -23,7 +23,7 @@ const services: ServiceItem[] = [
   {
     id: "web-dev",
     title: "Web Development",
-    description: "Custom, responsive, and highly performant web applications built from scratch. From sleek landing pages to complex web tools, I use modern technologies like React, Tailwind, and Next.js to bring your vision to life.",
+    description: "Custom, responsive, and highly performant web applications built from scratch. From sleek landing pages to complex web tools, I use modern technologies like React, Tailwind, and Vue.js to bring your vision to life.",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop", // Replace with your webdevImg
     icon: <Code className="w-6 h-6 text-primary" />,
   },
@@ -43,7 +43,7 @@ export const ServicesSection = () => {
         >
           <h2 className="section-title">Services</h2>
           <p className="section-subtitle max-w-2xl mx-auto">
-            Offering specialized solutions to help you learn, build, and grow.
+            Offering specialized solutions for your individual needs.
           </p>
         </motion.div>
 
